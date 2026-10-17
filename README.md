@@ -99,25 +99,28 @@ flowchart LR
 
 屏是 240×240，黑底。中文用宋体，英文和数字用等宽字。顶上那排只有 REC、STOP 这种拉丁词，因为那套字只有英文。底下两行是状态。声纹页把磁带拿开，中间是名单。
 
-| 开机 | 连接中 | 录音中 |
-| --- | --- | --- |
-| <img src="screens/boot.png" width="220" alt="开机"> | <img src="screens/connecting.png" width="220" alt="连接中"> | <img src="screens/recording.png" width="220" alt="录音中"> |
-| 通电后先亮这一屏，版本号是板子上真装的那个。取代小智原来的白屏。 | 正在连 WiFi 和服务器。这时候已经在录，先存在机器里，时间是真的在涨。 | 平时就是这一屏。左下是今天录了多久，右下是麦克风音量，底下是刚说的那句。 |
-
-| 没网 | 补传 | 已停止 |
-| --- | --- | --- |
-| <img src="screens/offline.png" width="220" alt="没网"> | <img src="screens/upload.png" width="220" alt="补传"> | <img src="screens/stopped.png" width="220" alt="已停止"> |
-| 路上没信号。照样在录，存在机器里，有网了自己补传。 | 刚连上，把存着的那段发出去。传完，字幕就接着出来。 | 单击 BOOT 停下。磁带不转。插着电的时候，电量格子一格格往上走。 |
-
-| 声纹名单 | 录声纹 | 升级中 |
-| --- | --- | --- |
-| <img src="screens/people.png" width="220" alt="声纹名单"> | <img src="screens/enroll.png" width="220" alt="录声纹"> | <img src="screens/update.png" width="220" alt="升级中"> |
-| 双击 BOOT。音量键上下选，可以一直新增。录过的右边写「已录」。 | 在名单里单击。倒计时到 0 自己停。记上之后写「录好了」，没听清就写「没听清」。 | 有新版本时自己下载。左下是真进度。下完重启，连不上服务器会退回旧的。 |
-
-| 联网设置 | 电量低 |
-| --- | --- |
-| <img src="screens/setup.png" width="220" alt="联网设置"> | <img src="screens/sleep.png" width="220" alt="电量低"> |
-| 长按 BOOT。手机连上板子自己的热点，打开上面的网址，把 WiFi 写进去。最多记 10 个。 | 电量到 10% 停录，把攒的传完，然后深睡，不把电放干。插电或按 BOOT 醒来，接着录。 |
+<table>
+<tr>
+<td width="33%" align="center" valign="top"><b>开机</b><br><img src="screens/boot.png" width="200" alt="开机"><br>通电后先亮这一屏。版本号是板子上真装的那个。</td>
+<td width="33%" align="center" valign="top"><b>连接中</b><br><img src="screens/connecting.png" width="200" alt="连接中"><br>正在连 WiFi 和服务器。这时候已经在录，先存在机器里。</td>
+<td width="33%" align="center" valign="top"><b>录音中</b><br><img src="screens/recording.png" width="200" alt="录音中"><br>平时就是这一屏。左下是今天录了多久，底下是刚说的那句。</td>
+</tr>
+<tr>
+<td width="33%" align="center" valign="top"><b>没网</b><br><img src="screens/offline.png" width="200" alt="没网"><br>路上没信号。照样在录，存在机器里，有网了自己补传。</td>
+<td width="33%" align="center" valign="top"><b>补传</b><br><img src="screens/upload.png" width="200" alt="补传"><br>刚连上，把存着的那段发出去。传完，字幕接着出来。</td>
+<td width="33%" align="center" valign="top"><b>已停止</b><br><img src="screens/stopped.png" width="200" alt="已停止"><br>单击 BOOT 停下。磁带不转。插着电，电量往上走。</td>
+</tr>
+<tr>
+<td width="33%" align="center" valign="top"><b>声纹名单</b><br><img src="screens/people.png" width="200" alt="声纹名单"><br>双击 BOOT。音量键上下选。录过的右边写「已录」。</td>
+<td width="33%" align="center" valign="top"><b>录声纹</b><br><img src="screens/enroll.png" width="200" alt="录声纹"><br>单击开始，倒计时到 0 自己停。记上写「录好了」。</td>
+<td width="33%" align="center" valign="top"><b>升级中</b><br><img src="screens/update.png" width="200" alt="升级中"><br>有新版本时自己下载。下完重启。</td>
+</tr>
+<tr>
+<td width="33%" align="center" valign="top"><b>联网设置</b><br><img src="screens/setup.png" width="200" alt="联网设置"><br>长按 BOOT。手机连上热点，把 WiFi 写进去。</td>
+<td width="33%" align="center" valign="top"><b>电量低</b><br><img src="screens/sleep.png" width="200" alt="电量低"><br>到 10% 先停录，把攒的传完，再睡下。</td>
+<td width="33%"></td>
+</tr>
+</table>
 
 动的稿子在 [`design/各状态屏_初稿.html`](design/各状态屏_初稿.html)，用浏览器打开。录音中那一屏单独的定稿是 [`design/录音中一屏_定稿.html`](design/录音中一屏_定稿.html)。磁带、灯、滚轮、VU 的零件在 `design/固件素材/png/`。字和图怎么进固件，写在 [`design/固件素材/README.md`](design/固件素材/README.md)。
 
