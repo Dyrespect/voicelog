@@ -1,0 +1,20 @@
+{
+  "name": "voicelog-server",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "start": "node src/server.mjs",
+    "pull": "node pull.mjs",
+    "test": "node --test test/convs.test.mjs test/adpcm.test.mjs test/gate.test.mjs test/speakers.test.mjs test/printsStore.test.mjs test/xiaozhi.test.mjs test/vad.test.mjs",
+    "backfill": "node backfill-titles.mjs"
+  },
+  "dependencies": {
+    "cos-nodejs-sdk-v5": "^2.14.0",
+    "opusscript": "^0.1.1",
+    "sherpa-onnx-node": "^1.13.8",
+    "ws": "^8.18.0"
+  }
+}
