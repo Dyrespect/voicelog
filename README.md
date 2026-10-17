@@ -1,24 +1,44 @@
 # 随身录音
 
-一块 1.54 寸的小屏，开机就录。说的话变成带时间的文字。原始声音不留。
+一块 1.54 寸的小屏。开机就录，回来是带时间的文字。声音不留。
 
-硬件是买来焊好的正辰 ESP32-S3 方屏，大约六七十块。出门靠 WiFi，没有电话卡。屏幕关着、没插电时，大约每 30 秒连一次把攒的传完。完全没网时，板子里大约留最近 25 分钟。熄屏续航实测过一次：6 小时 35 分。
+<p align="center">
+  <img src="screens/recording.png" width="360" alt="录音中">
+</p>
 
 ## 每一屏
 
-各状态画在一张页面里，用浏览器打开 [`design/各状态屏_初稿.html`](design/各状态屏_初稿.html)。
+屏幕是 240×240。黑底，磁带，中文宋体，英文和数字等宽。下面这些就是板子上会看到的。
 
-开机、连接中、录音中、没网、补传、已停止、声纹名单、录声纹、升级中、联网设置、电量低先睡了，都在这一页。录音中那一屏的定稿是 [`design/录音中一屏_定稿.html`](design/录音中一屏_定稿.html)。磁带、灯、滚轮、VU 的零件图在 `design/固件素材/png/`。
+| 开机 | 连接中 | 录音中 |
+| --- | --- | --- |
+| <img src="screens/boot.png" width="220" alt="开机"> | <img src="screens/connecting.png" width="220" alt="连接中"> | <img src="screens/recording.png" width="220" alt="录音中"> |
+| 通电后先看到这一屏 | 已经在录，先存在机器里 | 平时就是这一屏 |
 
-屏幕是 240×240，黑底。中文用宋体，英文和数字用等宽字。声纹页把磁带拿开，中间是名单。
+| 没网 | 补传 | 已停止 |
+| --- | --- | --- |
+| <img src="screens/offline.png" width="220" alt="没网"> | <img src="screens/upload.png" width="220" alt="补传"> | <img src="screens/stopped.png" width="220" alt="已停止"> |
+| 路上没信号，照样在录 | 刚连上，把攒的发出去 | 单击 BOOT 停下。插着电 |
 
-## 仓库里有什么
+| 声纹名单 | 录声纹 | 升级中 |
+| --- | --- | --- |
+| <img src="screens/people.png" width="220" alt="声纹名单"> | <img src="screens/enroll.png" width="220" alt="录声纹"> | <img src="screens/update.png" width="220" alt="升级中"> |
+| 双击 BOOT。音量键上下选 | 单击开始，到点自己停 | 下载的时候别关机 |
 
-- `server/`：收 Opus、判断有没有人说话、转写、声纹、按天存文字。Node 22。密钥放在环境变量里，样例是 [`.env.example`](.env.example)。
-- `firmware/voicelog/`：板子上的录音和屏幕代码，要嵌进 [xiaozhi-esp32](https://github.com/78/xiaozhi-esp32) 才能编。
-- `design/`：屏幕稿。
+| 联网设置 | 电量低 |
+| --- | --- |
+| <img src="screens/setup.png" width="220" alt="联网设置"> | <img src="screens/sleep.png" width="220" alt="电量低"> |
+| 长按 BOOT，手机连这个热点 | 到 10% 先睡，插电或按 BOOT 醒来 |
 
-声纹模型（CAM++、说话人分段、Silero VAD）不放在仓库里。放到 `server/models/`，文件名是 `campplus_zh.onnx`、`segmentation.onnx`、`silero_vad.onnx`。
+稿子还在 [`design/各状态屏_初稿.html`](design/各状态屏_初稿.html)，用浏览器打开能看动的。录音中那一屏的定稿是 [`design/录音中一屏_定稿.html`](design/录音中一屏_定稿.html)。
+
+## 这块东西
+
+现成焊好的正辰 ESP32-S3 方屏，大约六七十块。出门靠 WiFi，没有电话卡。屏幕关着、没插电时，大约每 30 秒连一次，传完再把 WiFi 关掉。完全没网时，板子里大约留最近 25 分钟。熄屏续航实测过一次，6 小时 35 分。
+
+- `server/`：收声音、判断有没有人在说话、转写、声纹、按天存文字。
+- `firmware/voicelog/`：板子上的录音和屏幕。要放进 [xiaozhi-esp32](https://github.com/78/xiaozhi-esp32) 才能编。
+- 密钥放环境变量，样例是 [`.env.example`](.env.example)。声纹模型不在仓库里。
 
 ```bash
 cd server
@@ -27,5 +47,3 @@ npm ci
 npm test
 npm start
 ```
-
-转写用阿里百炼，文字存在腾讯云 COS 的 `voicelog/` 前缀。声纹一个人一行，写在 `VOICELOG_DB` 指向的 sqlite。空表不能覆盖已经有人的库。
